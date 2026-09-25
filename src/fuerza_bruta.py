@@ -45,13 +45,44 @@ def verificar_caja(tablero, inicio_fila, inicio_columna):
                 valores.append(tablero[f][c])
     return len(valores) == len(set(valores))
 
+def verificar_cajas(tablero):
+    for inicio_fila in range(0, 9, 3):
+        for inicio_columna in range(0, 9, 3):
+            if not verificar_caja(tablero, inicio_fila, inicio_columna):
+                return False
+    return True
+
 def verificar_tablero(tablero):
     return verificar_filas(tablero) and verificar_columnas(tablero)
+
+def fuerza_bruta_sudoku(tablero):
+    """
+    probando TODAS las combinaciones posibles para las
+    celdas vacías y validando el tablero completo al final
+    de cada combinación.
+    """
+    celdas_vacias = encontrar_celdas_vacias(tablero)
+    n = len(celdas_vacias)
+
+    for combinacion in itertools.product(range(1, 10), repeat=n):
+        for (fila, columna), valor in zip(celdas_vacias, combinacion):
+            tablero[fila][columna] = valor
+
+        if verificar_tablero(tablero):
+            return True
+
+    return False
 
 
 def imprimir_tablero(tablero):
     for fila in tablero:
         print(fila)
 
+print("Tablero original:")
+imprimir_tablero(tablero_pequeno)
 
-
+if fuerza_bruta_sudoku(tablero_pequeno):
+    print("\nTablero resuelto (fuerza bruta):")
+    imprimir_tablero(tablero_pequeno)
+else:
+    print("\nNo existe solución.")
