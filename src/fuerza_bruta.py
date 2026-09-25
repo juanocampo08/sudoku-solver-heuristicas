@@ -92,6 +92,10 @@ else:
     print("\nNo existe solución.")
 """
 
+"""
+Para que veas funcionando la solucion, quita las comillas dobles que encierran ese bloque de codigo previo a este mensaje.
+Además, agrega ceros al sudoku para que lo veas funcionar de la mejor manera.
+"""
 
 """
 Medicion empirica.
