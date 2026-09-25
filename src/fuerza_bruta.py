@@ -12,6 +12,15 @@ tablero_pequeno = [
     [3, 4, 5, 2, 8, 6, 1, 0, 0],
 ]
 
+def encontrar_celdas_vacias(tablero):
+    """Devuelve la lista de posiciones (fila, columna) de todas las celdas vacías.""" 
+    celdas_vacias = []
+    for fila in range(9):
+        for columna in range(9):
+            if tablero[fila][columna] == 0:
+                celdas_vacias.append((fila, columna))
+    return celdas_vacias
+
 def verificar_filas(tablero):
     for fila in range(9):
         valores = [v for v in tablero[fila] if v != 0]
@@ -27,6 +36,14 @@ def verificar_columnas(tablero):
             return False
     return True
 
+def verificar_caja(tablero, inicio_fila, inicio_columna):
+    """Verifica que una caja 3x3 específica (dada por su esquina superior izquierda) no tenga números repetidos."""
+    valores = []
+    for f in range(inicio_fila, inicio_fila + 3):
+        for c in range(inicio_columna, inicio_columna + 3):
+            if tablero[f][c] != 0:
+                valores.append(tablero[f][c])
+    return len(valores) == len(set(valores))
 
 def verificar_tablero(tablero):
     return verificar_filas(tablero) and verificar_columnas(tablero)
