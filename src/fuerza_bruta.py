@@ -1,15 +1,18 @@
 import itertools
+import time
+import copy
+import json
 
 tablero_pequeno = [
-    [5, 3, 4, 6, 0, 8, 9, 0, 2],
+    [5, 3, 4, 6, 7, 8, 9, 1, 2],
     [6, 7, 2, 1, 9, 5, 3, 4, 8],
-    [1, 9, 8, 0, 4, 2, 0, 6, 7],
-    [8, 5, 0, 7, 6, 1, 4, 0, 3],
-    [4, 0, 6, 8, 0, 3, 0, 9, 1],
-    [7, 1, 3, 9, 2, 0, 8, 5, 6],
-    [9, 6, 1, 0, 3, 7, 2, 8, 4],
-    [2, 0, 7, 4, 1, 9, 6, 3, 5],
-    [3, 4, 5, 2, 8, 6, 1, 0, 0],
+    [1, 9, 8, 3, 4, 2, 5, 6, 7],
+    [8, 5, 9, 7, 6, 1, 4, 2, 3],
+    [4, 2, 6, 8, 5, 3, 7, 9, 1],
+    [7, 1, 3, 9, 2, 4, 8, 5, 6],
+    [9, 6, 1, 5, 3, 7, 2, 8, 4],
+    [2, 8, 7, 4, 1, 9, 6, 3, 5],
+    [3, 4, 5, 2, 8, 6, 1, 7, 9],
 ]
 
 def encontrar_celdas_vacias(tablero):
@@ -53,7 +56,7 @@ def verificar_cajas(tablero):
     return True
 
 def verificar_tablero(tablero):
-    return verificar_filas(tablero) and verificar_columnas(tablero)
+    return verificar_filas(tablero) and verificar_columnas(tablero) and verificar_cajas(tablero)
 
 def fuerza_bruta_sudoku(tablero):
     """
@@ -78,6 +81,7 @@ def imprimir_tablero(tablero):
     for fila in tablero:
         print(fila)
 
+"""
 print("Tablero original:")
 imprimir_tablero(tablero_pequeno)
 
@@ -86,3 +90,31 @@ if fuerza_bruta_sudoku(tablero_pequeno):
     imprimir_tablero(tablero_pequeno)
 else:
     print("\nNo existe solución.")
+"""
+
+def generar_tablero_prueba(n_vacias):
+    """Toma el tablero base resuelto y vacía las últimas n_vacias celdas (en orden fila-major)."""
+    tablero = copy.deepcopy(tablero_pequeno)
+    posiciones = [(f, c) for f in range(9) for c in range(9)]
+    for (f, c) in posiciones[-n_vacias:]:
+        tablero[f][c] = 0
+    return tablero
+
+resultados = []
+for n in [1, 2, 3, 4, 5, 6, 7]:
+    tablero_prueba = generar_tablero_prueba(n)
+    inicio = time.perf_counter()
+    resuelto = fuerza_bruta_sudoku(tablero_prueba)
+    fin = time.perf_counter()
+    tiempo = fin - inicio
+    combinaciones_teoricas = 9 ** n
+    resultados.append({
+        "n_celdas_vacias": n,
+        "tiempo_segundos": tiempo,
+        "combinaciones_teoricas": combinaciones_teoricas,
+        "resuelto": resuelto
+    })
+    print(f"n={n} | tiempo={tiempo:.6f}s | 9^n={combinaciones_teoricas} | resuelto={resuelto}")
+
+with open("resultados.json", "w") as f:
+    json.dump(resultados, f, indent=2)
