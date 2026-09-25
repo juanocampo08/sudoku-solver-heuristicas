@@ -92,6 +92,10 @@ else:
     print("\nNo existe solución.")
 """
 
+
+"""
+Medicion empirica.
+"""
 def generar_tablero_prueba(n_vacias):
     """Toma el tablero base resuelto y vacía las últimas n_vacias celdas (en orden fila-major)."""
     tablero = copy.deepcopy(tablero_pequeno)
