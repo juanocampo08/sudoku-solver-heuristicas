@@ -1,0 +1,250 @@
+[
+  {
+    "caso": "pequeno",
+    "vacias": 5,
+    "tecnica": "Backtracking (orden fijo)",
+    "tiempo_s": 0.0007951000006869435,
+    "estado": "OK",
+    "detalle": "nodos=6, retrocesos=0",
+    "stats": {
+      "nodos": 6,
+      "retrocesos": 0,
+      "excedido": false
+    }
+  },
+  {
+    "caso": "pequeno",
+    "vacias": 5,
+    "tecnica": "Backtracking + MRV",
+    "tiempo_s": 0.0007545999833382666,
+    "estado": "OK",
+    "detalle": "nodos=6, retrocesos=0",
+    "stats": {
+      "nodos": 6,
+      "retrocesos": 0,
+      "excedido": false
+    }
+  },
+  {
+    "caso": "pequeno",
+    "vacias": 5,
+    "tecnica": "Divide y vencerás (bandas)",
+    "tiempo_s": 0.000894299999345094,
+    "estado": "OK",
+    "detalle": "parciales/banda=[1, 1, 1]",
+    "stats": {
+      "parciales_por_banda": [
+        1,
+        1,
+        1
+      ],
+      "combinaciones": 8,
+      "soluciones": 1,
+      "excedido": false
+    }
+  },
+  {
+    "caso": "pequeno",
+    "vacias": 5,
+    "tecnica": "Programación dinámica",
+    "tiempo_s": 0.0009564000065438449,
+    "estado": "OK",
+    "detalle": "estados=9, reutilizados=0",
+    "stats": {
+      "estados": 9,
+      "reutilizados": 0
+    }
+  },
+  {
+    "caso": "pequeno",
+    "vacias": 5,
+    "tecnica": "Greedy",
+    "tiempo_s": 0.0008567999466322362,
+    "estado": "OK",
+    "detalle": "sin estadísticas",
+    "stats": {}
+  },
+  {
+    "caso": "mediano",
+    "vacias": 40,
+    "tecnica": "Backtracking (orden fijo)",
+    "tiempo_s": 0.0012980999890714884,
+    "estado": "OK",
+    "detalle": "nodos=83, retrocesos=42",
+    "stats": {
+      "nodos": 83,
+      "retrocesos": 42,
+      "excedido": false
+    }
+  },
+  {
+    "caso": "mediano",
+    "vacias": 40,
+    "tecnica": "Backtracking + MRV",
+    "tiempo_s": 0.0017599000129848719,
+    "estado": "OK",
+    "detalle": "nodos=41, retrocesos=0",
+    "stats": {
+      "nodos": 41,
+      "retrocesos": 0,
+      "excedido": false
+    }
+  },
+  {
+    "caso": "mediano",
+    "vacias": 40,
+    "tecnica": "Divide y vencerás (bandas)",
+    "tiempo_s": 0.019143300014548004,
+    "estado": "OK",
+    "detalle": "parciales/banda=[1, 9, 4]",
+    "stats": {
+      "parciales_por_banda": [
+        1,
+        9,
+        4
+      ],
+      "combinaciones": 147,
+      "soluciones": 1,
+      "excedido": false
+    }
+  },
+  {
+    "caso": "mediano",
+    "vacias": 40,
+    "tecnica": "Programación dinámica",
+    "tiempo_s": 0.0138306999579072,
+    "estado": "OK",
+    "detalle": "estados=13, reutilizados=0",
+    "stats": {
+      "estados": 13,
+      "reutilizados": 0
+    }
+  },
+  {
+    "caso": "mediano",
+    "vacias": 40,
+    "tecnica": "Greedy",
+    "tiempo_s": 0.016777000040747225,
+    "estado": "OK",
+    "detalle": "sin estadísticas",
+    "stats": {}
+  },
+  {
+    "caso": "grande",
+    "vacias": 55,
+    "tecnica": "Backtracking (orden fijo)",
+    "tiempo_s": 0.4225212999735959,
+    "estado": "OK",
+    "detalle": "nodos=21622, retrocesos=21566",
+    "stats": {
+      "nodos": 21622,
+      "retrocesos": 21566,
+      "excedido": false
+    }
+  },
+  {
+    "caso": "grande",
+    "vacias": 55,
+    "tecnica": "Backtracking + MRV",
+    "tiempo_s": 0.01571420003892854,
+    "estado": "OK",
+    "detalle": "nodos=56, retrocesos=0",
+    "stats": {
+      "nodos": 56,
+      "retrocesos": 0,
+      "excedido": false
+    }
+  },
+  {
+    "caso": "grande",
+    "vacias": 55,
+    "tecnica": "Divide y vencerás (bandas)",
+    "tiempo_s": 1.900319300009869,
+    "estado": "OK",
+    "detalle": "parciales/banda=[405, 6, 52]",
+    "stats": {
+      "parciales_por_banda": [
+        405,
+        6,
+        52
+      ],
+      "combinaciones": 24783,
+      "soluciones": 1,
+      "excedido": false
+    }
+  },
+  {
+    "caso": "grande",
+    "vacias": 55,
+    "tecnica": "Programación dinámica",
+    "tiempo_s": 1.4457681000349112,
+    "estado": "OK",
+    "detalle": "estados=1498, reutilizados=295",
+    "stats": {
+      "estados": 1498,
+      "reutilizados": 295
+    }
+  },
+  {
+    "caso": "grande",
+    "vacias": 55,
+    "tecnica": "Greedy",
+    "tiempo_s": 0.04640560003463179,
+    "estado": "OK",
+    "detalle": "sin estadísticas",
+    "stats": {}
+  },
+  {
+    "caso": "extremo",
+    "vacias": 64,
+    "tecnica": "Backtracking (orden fijo)",
+    "tiempo_s": 1.6640630000038072,
+    "estado": "excedió límite",
+    "detalle": "nodos=100000, retrocesos=99973",
+    "stats": {
+      "nodos": 100000,
+      "retrocesos": 99973,
+      "excedido": true
+    }
+  },
+  {
+    "caso": "extremo",
+    "vacias": 64,
+    "tecnica": "Backtracking + MRV",
+    "tiempo_s": 0.07680570002412423,
+    "estado": "OK",
+    "detalle": "nodos=678, retrocesos=613",
+    "stats": {
+      "nodos": 678,
+      "retrocesos": 613,
+      "excedido": false
+    }
+  },
+  {
+    "caso": "extremo",
+    "vacias": 64,
+    "tecnica": "Divide y vencerás (bandas)",
+    "tiempo_s": null,
+    "estado": "no ejecutado",
+    "detalle": "omitido: más de 55 celdas vacías",
+    "stats": {}
+  },
+  {
+    "caso": "extremo",
+    "vacias": 64,
+    "tecnica": "Programación dinámica",
+    "tiempo_s": null,
+    "estado": "no ejecutado",
+    "detalle": "omitido: más de 55 celdas vacías",
+    "stats": {}
+  },
+  {
+    "caso": "extremo",
+    "vacias": 64,
+    "tecnica": "Greedy",
+    "tiempo_s": 0.030631000001449138,
+    "estado": "sin solución",
+    "detalle": "sin estadísticas",
+    "stats": {}
+  }
+]
