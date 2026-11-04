@@ -18,6 +18,7 @@ from backtracking import resolver_backtracking
 from divide_y_venceras import resolver_dyv
 from greedy import resolver_greedy
 from programacion_dinamica import resolver as resolver_programacion_dinamica
+from fuerza_bruta import resolver_fuerza_bruta
 from utils import (
     RAIZ,
     cargar_tablero,
@@ -29,6 +30,7 @@ from utils import (
 
 logger = logging.getLogger(__name__)
 
+MAX_COMBINACIONES_FB = 100_000
 MAX_NODOS_BT = 100_000
 MAX_COMBINACIONES_DYV = 100_000
 MAX_ESTADOS_DP = 10_000
@@ -62,12 +64,15 @@ def estado(solucion, stats, original):
 
 def describir_estadisticas(stats):
     """Resume en una línea las estadísticas que devuelve cada método."""
+
     if "nodos" in stats:
         return f"nodos={stats['nodos']}, retrocesos={stats['retrocesos']}"
     if "parciales_por_banda" in stats:
         return f"parciales/banda={stats['parciales_por_banda']}"
     if "estados" in stats:
         return f"estados={stats['estados']}, reutilizados={stats['reutilizados']}"
+    if "combinaciones" in stats:
+        return f"combinaciones={stats['combinaciones']}"
     if stats.get("excedido"):
         return "se alcanzó el límite de cálculo"
     return "sin estadísticas"
@@ -89,6 +94,7 @@ def resolver_dp_comparable(original):
 def obtener_tecnicas():
     """Devuelve los métodos de resolución y sus límites compartidos."""
     return [
+        ("Fuerza Bruta", lambda o: resolver_fuerza_bruta(o, max_combinaciones=MAX_COMBINACIONES_FB)),
         ("Backtracking (orden fijo)", lambda o: resolver_backtracking(o, usar_mrv=False, max_nodos=MAX_NODOS_BT)),
         ("Backtracking + MRV", lambda o: resolver_backtracking(o, usar_mrv=True)),
         ("Divide y vencerás (bandas)", resolver_dyv_comparable),

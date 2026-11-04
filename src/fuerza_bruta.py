@@ -81,25 +81,32 @@ def imprimir_tablero(tablero):
     for fila in tablero:
         print(fila)
 
-"""
-print("Tablero original:")
-imprimir_tablero(tablero_pequeno)
 
-if fuerza_bruta_sudoku(tablero_pequeno):
-    print("\nTablero resuelto (fuerza bruta):")
-    imprimir_tablero(tablero_pequeno)
-else:
-    print("\nNo existe solución.")
-"""
+def resolver_fuerza_bruta(tablero, max_combinaciones=None):
+    """
+    Resuelve el Sudoku por fuerza bruta pura (producto cartesiano 9^n)
+    y devuelve (solucion, estadisticas) para integrarse con comparativa.py.
+    """
+    trabajo = copy.deepcopy(tablero)
+    celdas_vacias = encontrar_celdas_vacias(trabajo)
+    n = len(celdas_vacias)
+    estadisticas = {"combinaciones": 0, "excedido": False}
 
-"""
-Para que veas funcionando la solucion, quita las comillas dobles que encierran ese bloque de codigo previo a este mensaje.
-Además, agrega ceros al sudoku para que lo veas funcionar de la mejor manera.
-"""
+    for combinacion in itertools.product(range(1, 10), repeat=n):
+        if max_combinaciones is not None and estadisticas["combinaciones"] >= max_combinaciones:
+            estadisticas["excedido"] = True
+            return None, estadisticas
 
-"""
-Medicion empirica.
-"""
+        estadisticas["combinaciones"] += 1
+        for (fila, columna), valor in zip(celdas_vacias, combinacion):
+            trabajo[fila][columna] = valor
+
+        if verificar_tablero(trabajo):
+            return trabajo, estadisticas
+
+    return None, estadisticas
+
+
 def generar_tablero_prueba(n_vacias):
     """Toma el tablero base resuelto y vacía las últimas n_vacias celdas (en orden fila-major)."""
     tablero = copy.deepcopy(tablero_pequeno)
@@ -108,21 +115,33 @@ def generar_tablero_prueba(n_vacias):
         tablero[f][c] = 0
     return tablero
 
-resultados = []
-for n in [1, 2, 3, 4, 5, 6, 7]:
-    tablero_prueba = generar_tablero_prueba(n)
-    inicio = time.perf_counter()
-    resuelto = fuerza_bruta_sudoku(tablero_prueba)
-    fin = time.perf_counter()
-    tiempo = fin - inicio
-    combinaciones_teoricas = 9 ** n
-    resultados.append({
-        "n_celdas_vacias": n,
-        "tiempo_segundos": tiempo,
-        "combinaciones_teoricas": combinaciones_teoricas,
-        "resuelto": resuelto
-    })
-    print(f"n={n} | tiempo={tiempo:.6f}s | 9^n={combinaciones_teoricas} | resuelto={resuelto}")
 
-with open("resultados.json", "w") as f:
-    json.dump(resultados, f, indent=2)
+if __name__ == "__main__":
+    print("Tablero original:")
+    imprimir_tablero(tablero_pequeno)
+
+    if fuerza_bruta_sudoku(tablero_pequeno):
+        print("\nTablero resuelto (fuerza bruta):")
+        imprimir_tablero(tablero_pequeno)
+    else:
+        print("\nNo existe solución.")
+
+    # Medición empírica (Entrega 1)
+    resultados = []
+    for n in [1, 2, 3, 4, 5, 6, 7]:
+        tablero_prueba = generar_tablero_prueba(n)
+        inicio = time.perf_counter()
+        resuelto = fuerza_bruta_sudoku(tablero_prueba)
+        fin = time.perf_counter()
+        tiempo = fin - inicio
+        combinaciones_teoricas = 9 ** n
+        resultados.append({
+            "n_celdas_vacias": n,
+            "tiempo_segundos": tiempo,
+            "combinaciones_teoricas": combinaciones_teoricas,
+            "resuelto": resuelto
+        })
+        print(f"n={n} | tiempo={tiempo:.6f}s | 9^n={combinaciones_teoricas} | resuelto={resuelto}")
+
+    with open("resultados.json", "w") as f:
+        json.dump(resultados, f, indent=2)
